@@ -1,0 +1,34 @@
+{
+  "name": "expo-voicevox",
+  "version": "0.1.0",
+  "description": "Expo module for VOICEVOX Japanese TTS engine",
+  "main": "src/index.ts",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "expo-module build",
+    "clean": "expo-module clean",
+    "lint": "expo-module lint",
+    "test": "expo-module test",
+    "prepare": "expo-module prepare || true",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "expo-module": "expo-module"
+  },
+  "keywords": [
+    "expo",
+    "expo-module",
+    "voicevox",
+    "tts",
+    "text-to-speech",
+    "japanese"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "expo-module-scripts": "~5.0.0",
+    "expo-modules-core": "~3.0.0"
+  },
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
+  }
+}

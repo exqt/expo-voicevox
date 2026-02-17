@@ -1,0 +1,22 @@
+{
+  "expo": {
+    "name": "expo-voicevox-example",
+    "slug": "expo-voicevox-example",
+    "version": "1.0.0",
+    "scheme": "expo-voicevox-example",
+    "android": {
+      "package": "expo.modules.voicevox.example",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      "expo-audio"
+    ],
+    "ios": {
+      "bundleIdentifier": "expo.modules.voicevox.example"
+    }
+  }
+}
