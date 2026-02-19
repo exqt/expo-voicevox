@@ -64,20 +64,6 @@ The native libraries are pre-bundled in this repository. Below are the original 
 | iOS | `voicevox_core.xcframework` | [voicevox_core-ios-xcframework-cpu-0.16.3.zip](https://github.com/VOICEVOX/voicevox_core/releases/tag/0.16.3) |
 | iOS | `voicevox_onnxruntime.xcframework` | [voicevox_onnxruntime-ios-xcframework-1.17.3.zip](https://github.com/VOICEVOX/onnxruntime-builder/releases/tag/voicevox_onnxruntime-1.17.3) |
 
-## Installation
-
-```bash
-npm install expo-voicevox
-```
-
-Then rebuild your native project:
-
-```bash
-cd example
-npx expo run:android  # Android
-npx expo run:ios      # iOS
-```
-
 ## Usage
 
 ### 1. Copy assets to the device filesystem
