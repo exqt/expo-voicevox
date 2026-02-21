@@ -87,10 +87,9 @@ const DICT_ASSETS: Record<string, number> = {
 
 const VVM_ASSET = require("./assets/model/0.vvm");
 
-// Copy each file to documentDirectory if not already present
 const docDir = FileSystem.documentDirectory!;
 for (const [filename, moduleId] of Object.entries(DICT_ASSETS)) {
-  const targetPath = docDir + "dict/" + filename;
+  const targetPath = docDir + "open_jtalk_dic_utf_8-1.11/" + filename;
   const info = await FileSystem.getInfoAsync(targetPath);
   if (!info.exists) {
     const [asset] = await Asset.loadAsync(moduleId);
@@ -107,6 +106,52 @@ for (const [filename, moduleId] of Object.entries(DICT_ASSETS)) {
 > ];
 > ```
 
+#### Optional: Use zip for large dictionary assets
+
+On **Windows + Android Emulator**, bundling individual dictionary files can fail due to the large total asset size. You can bundle them as a single zip file and extract at runtime using `react-native-zip-archive`:
+
+```bash
+npm install react-native-zip-archive
+```
+
+Compress the dictionary folder (the zip should contain the `open_jtalk_dic_utf_8-1.11/` directory):
+
+```bash
+zip -r assets/open_jtalk_dic_utf_8-1.11.zip open_jtalk_dic_utf_8-1.11/
+```
+
+Then replace the per-file copy with:
+
+```typescript
+import { unzip } from "react-native-zip-archive";
+
+const DICT_ZIP = require("./assets/open_jtalk_dic_utf_8-1.11.zip");
+
+const docDir = FileSystem.documentDirectory!;
+const dictDir = docDir + "open_jtalk_dic_utf_8-1.11/";
+
+const dictInfo = await FileSystem.getInfoAsync(dictDir);
+if (!dictInfo.exists) {
+  const [asset] = await Asset.loadAsync(DICT_ZIP);
+  const zipPath = docDir + "open_jtalk_dic_utf_8-1.11.zip";
+  await FileSystem.copyAsync({ from: asset.localUri!, to: zipPath });
+
+  const nativeZipPath = zipPath.replace("file://", "");
+  const nativeDocDir = docDir.replace("file://", "");
+  await unzip(nativeZipPath, nativeDocDir);
+
+  await FileSystem.deleteAsync(zipPath, { idempotent: true });
+}
+```
+
+> **Note:** Also add `zip` to `assetExts`:
+> ```js
+> config.resolver.assetExts = [
+>   ...config.resolver.assetExts,
+>   'onnx', 'bin', 'dic', 'def', 'vvm', 'zip',
+> ];
+> ```
+
 ### 2. Initialize the engine
 
 ```typescript
@@ -114,7 +159,7 @@ import * as Voicevox from "expo-voicevox";
 
 // voicevox_core expects native filesystem paths (no file:// prefix)
 const docDir = FileSystem.documentDirectory!.replace("file://", "");
-const dictDir = docDir + "dict";
+const dictDir = docDir + "open_jtalk_dic_utf_8-1.11";
 const vvmPath = docDir + "model/0.vvm";
 
 await Voicevox.initialize({
