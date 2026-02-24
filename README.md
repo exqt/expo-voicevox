@@ -1,14 +1,14 @@
 # expo-voicevox
-An Expo module for [VOICEVOX](https://voicevox.hiroshiba.jp/) Japanese text-to-speech engine. 
+An Expo module for [VOICEVOX](https://voicevox.hiroshiba.jp/) Japanese text-to-speech engine.
 
 # VOICEVOX & ONNX Runtime Version
-- **voicevox_core 0.16.3** 
+- **voicevox_core 0.16.3**
 - **voicevox_onnxruntime 1.17.3**
 
 ## Supported Platforms
 
-- ✅ **Android**: arm64-v8a
-- ✅ **iOS**: arm64 
+- ✅ **Android**: arm64-v8a, x86_64
+- ✅ **iOS**: arm64
 - ❌ **Web**: Not supported
 
 
